@@ -13,7 +13,7 @@
 Install the plugin using the InkyPi CLI, providing the plugin ID and GitHub repository URL:
 
 ```bash
-install/cli/inkypi-plugin install pluginmanager https://github.com/RobinWts/InkyPi-Plugin-PluginManager
+inkypi plugin install pluginmanager https://github.com/RobinWts/InkyPi-Plugin-PluginManager
 ```
 
 ## Development-status
