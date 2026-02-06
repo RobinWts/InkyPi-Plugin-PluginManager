@@ -16,6 +16,10 @@ Install the plugin using the InkyPi CLI, providing the plugin ID and GitHub repo
 inkypi plugin install pluginmanager https://github.com/RobinWts/InkyPi-Plugin-PluginManager
 ```
 
+After succesfull install you need to run the patch-script to patch the InkyPi core files for use of PluginManager, see [CORE_CHANGES.md](https://github.com/RobinWts/InkyPi-Plugin-PluginManager/blob/main/pluginmanager/CORE_CHANGES.md) for details:
+```bash
+bash src/plugins/pluginmanager/patch-core.sh
+```
 ## Development-status
 
 WIP
