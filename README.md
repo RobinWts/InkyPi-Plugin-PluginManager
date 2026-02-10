@@ -38,31 +38,9 @@ inkypi plugin install pluginmanager https://github.com/RobinWts/InkyPi-Plugin-Pl
 
 ### Step 2: Patch Core Files
 
-After successful installation, you need to run the patch script to enable the Plugin Manager functionality. This is a **one-time operation** that adds generic blueprint registration support to InkyPi's core.
+After successful installation, a patch of two core files is needed to enable the Plugin Manager functionality. This is a **one-time operation** that adds generic blueprint registration support to InkyPi's core. It will be appied automatically when you access the PluginManager the first time.
 
 See [CORE_CHANGES.md](./pluginmanager/CORE_CHANGES.md) for detailed information about what the patch does and why it's needed.
-
-**Quick patch instructions:**
-
-1. Open a terminal/SSH session on your Raspberry Pi
-2. Navigate to your InkyPi directory (usually `/home/pi/InkyPi`)
-3. Run the patch script:
-   ```bash
-   cd /home/pi/InkyPi
-   bash src/plugins/pluginmanager/patch-core.sh
-   ```
-4. The script will automatically:
-   - Apply the necessary core changes
-   - Restart the InkyPi service
-5. Reload the Plugin Manager page in your web browser
-
-**That's it!** After patching, the Plugin Manager will work fully from the web interface.
-
-### Step 3: Access the Plugin Manager
-
-1. Open the InkyPi web interface in your browser
-2. Click the "Plugin Manager" icon 
-3. You'll see the Plugin Manager interface
 
 ## Usage
 
