@@ -1,12 +1,13 @@
 <style>
     /* Hide core "Update Now" and "Add to Playlist" buttons for this plugin (UI-only, no display/playlist use) */
-    #settingsForm > .buttons-container {
+    #settingsForm>.buttons-container {
         display: none !important;
     }
 
     .plugin-manage-container {
-        max-width: 700px;
-        margin: 0 auto;
+        width: 100%;
+        padding: 0 24px;
+        box-sizing: border-box;
     }
 
     .plugin-row {
@@ -35,11 +36,11 @@
         flex-direction: column;
         gap: 2px;
     }
-    
+
     .plugin-version-date-label {
         font-weight: 500;
     }
-    
+
     .plugin-version-date-value {
         font-size: 11px;
         color: var(--text-secondary, #888);
@@ -134,7 +135,7 @@
     [data-theme="dark"] .plugin-version-date-label {
         color: #eee;
     }
-    
+
     [data-theme="dark"] .plugin-version-date-value {
         color: #aaa;
     }
@@ -297,7 +298,7 @@
         btn.disabled = true;
         const originalText = btn.textContent;
         btn.textContent = 'Checking...';
-        
+
         try {
             // Check for updates
             const checkResponse = await fetch('/pluginmanager-api/check-updates', {
@@ -306,14 +307,14 @@
                 body: JSON.stringify({ plugin_id: pluginId })
             });
             const checkData = await checkResponse.json().catch(() => ({}));
-            
+
             if (!checkResponse.ok) {
                 showMessage(false, checkData.error || 'Failed to check for updates');
                 btn.disabled = false;
                 btn.textContent = originalText;
                 return;
             }
-            
+
             if (checkData.has_updates) {
                 // Show requester with update/cancel options
                 const updateConfirmed = confirm('Updates available! Do you want to update this plugin?');
@@ -340,7 +341,7 @@
         btn.disabled = true;
         const originalText = btn.textContent;
         btn.textContent = 'Updating...';
-        
+
         try {
             // Use direct URL since blueprint might not be registered yet
             const response = await fetch('/pluginmanager-api/update', {
