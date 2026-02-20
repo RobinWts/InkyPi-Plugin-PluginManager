@@ -454,9 +454,13 @@
             try {
                 const resp = await fetch(`/pluginmanager-api/job/${jobId}/output?since=${offset}`);
                 if (!resp.ok) {
-                    // Job not found or server error — stop polling
                     _stopTerminalPoll();
-                    _finishTerminalModal(false, 'Lost connection to job', reloadOnSuccess);
+                    if (reloadOnSuccess) {
+                        // A non-OK response while the service is expected to restart is normal
+                        _handleServiceRestart(outputEl);
+                    } else {
+                        _finishTerminalModal(false, 'Lost connection to job', false);
+                    }
                     return;
                 }
                 const data = await resp.json();
@@ -473,9 +477,13 @@
                     _finishTerminalModal(data.job_success, data.error, reloadOnSuccess);
                 }
             } catch (e) {
-                // Network error — stop polling and report
                 _stopTerminalPoll();
-                _finishTerminalModal(false, 'Network error: ' + e.message, reloadOnSuccess);
+                if (reloadOnSuccess) {
+                    // Fetch threw (e.g. "Load failed") — almost certainly the service restarted
+                    _handleServiceRestart(outputEl);
+                } else {
+                    _finishTerminalModal(false, 'Network error: ' + e.message, false);
+                }
             }
         }, 1000);
     }
@@ -485,6 +493,15 @@
             clearInterval(_terminalPollInterval);
             _terminalPollInterval = null;
         }
+    }
+
+    function _handleServiceRestart(outputEl) {
+        // Append a notice and treat as success — the service restart drops the connection
+        outputEl.textContent += '\n[INFO] Network connection lost — service is restarting, do not worry.\n';
+        const body = document.getElementById('pm-terminal-body');
+        body.scrollTop = body.scrollHeight;
+        // Treat as success: show the countdown reload button
+        _finishTerminalModal(true, null, true);
     }
 
     const _RELOAD_COUNTDOWN_SEC = 15;
