@@ -419,14 +419,14 @@
     let _terminalPollInterval = null;
 
     function openTerminalModal(title, jobId, { reloadOnSuccess = false } = {}) {
-        const overlay   = document.getElementById('pm-terminal-overlay');
-        const titleEl   = document.getElementById('pm-terminal-title');
-        const dotEl     = document.getElementById('pm-terminal-dot');
-        const outputEl  = document.getElementById('pm-terminal-output');
-        const footer    = document.getElementById('pm-terminal-footer');
+        const overlay = document.getElementById('pm-terminal-overlay');
+        const titleEl = document.getElementById('pm-terminal-title');
+        const dotEl = document.getElementById('pm-terminal-dot');
+        const outputEl = document.getElementById('pm-terminal-output');
+        const footer = document.getElementById('pm-terminal-footer');
         const statusMsg = document.getElementById('pm-terminal-status-msg');
         const reloadBtn = document.getElementById('pm-terminal-reload-btn');
-        const closeBtn  = document.getElementById('pm-terminal-close-btn');
+        const closeBtn = document.getElementById('pm-terminal-close-btn');
 
         // Reset state
         titleEl.textContent = title;
@@ -504,14 +504,14 @@
         _finishTerminalModal(true, null, true);
     }
 
-    const _RELOAD_COUNTDOWN_SEC = 15;
+    const _RELOAD_COUNTDOWN_SEC = 20;
 
     function _finishTerminalModal(success, errorMsg, reloadOnSuccess) {
-        const dotEl     = document.getElementById('pm-terminal-dot');
-        const footer    = document.getElementById('pm-terminal-footer');
+        const dotEl = document.getElementById('pm-terminal-dot');
+        const footer = document.getElementById('pm-terminal-footer');
         const statusMsg = document.getElementById('pm-terminal-status-msg');
         const reloadBtn = document.getElementById('pm-terminal-reload-btn');
-        const closeBtn  = document.getElementById('pm-terminal-close-btn');
+        const closeBtn = document.getElementById('pm-terminal-close-btn');
 
         dotEl.className = success ? 'success' : 'failure';
         footer.style.display = 'flex';
@@ -642,7 +642,7 @@
     }
 
     async function installPlugin() {
-        const urlInput  = document.getElementById('plugin-url');
+        const urlInput = document.getElementById('plugin-url');
         const installBtn = document.getElementById('install-btn');
 
         if (installBtn.disabled) {
